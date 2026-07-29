@@ -1,0 +1,145 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-27 18:47:45.695586",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "informations_g\u00e9n\u00e9rales_section",
+  "fournisseur",
+  "facture_fournisseur",
+  "expedition",
+  "date_du_co\u00fbt",
+  "nature_du_co\u00fbt_section",
+  "nature_du_co\u00fbt",
+  "cat\u00e9gorie",
+  "montants_section",
+  "montant",
+  "montant_soci\u00e9t\u00e9",
+  "devise",
+  "taux_de_change",
+  "suivi_section",
+  "statut",
+  "facture_dachat",
+  "observation"
+ ],
+ "fields": [
+  {
+   "fieldname": "informations_g\u00e9n\u00e9rales_section",
+   "fieldtype": "Section Break",
+   "label": "Informations g\u00e9n\u00e9rales"
+  },
+  {
+   "fieldname": "fournisseur",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Fournisseur",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "facture_fournisseur",
+   "fieldtype": "Link",
+   "label": "Facture fournisseur",
+   "options": "Purchase Invoice"
+  },
+  {
+   "fieldname": "expedition",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Expedition",
+   "options": "Expedition",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_du_co\u00fbt",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date du co\u00fbt",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nature_du_co\u00fbt_section",
+   "fieldtype": "Section Break",
+   "label": "Nature du co\u00fbt"
+  },
+  {
+   "fieldname": "nature_du_co\u00fbt",
+   "fieldtype": "Select",
+   "label": "Nature du co\u00fbt",
+   "options": "D\u00e9bours\nCo\u00fbt interne\nSous-traitance\nRefacturable"
+  },
+  {
+   "fieldname": "cat\u00e9gorie",
+   "fieldtype": "Select",
+   "label": "Cat\u00e9gorie",
+   "options": "Transport\nDouane\nManutention\nTHC\nMagasinage\nLivraison\nDivers"
+  },
+  {
+   "fieldname": "montants_section",
+   "fieldtype": "Section Break",
+   "label": "Montants"
+  },
+  {
+   "fieldname": "montant",
+   "fieldtype": "Currency",
+   "label": "Montant devise"
+  },
+  {
+   "fieldname": "montant_soci\u00e9t\u00e9",
+   "fieldtype": "Currency",
+   "label": "Montant soci\u00e9t\u00e9",
+   "read_only": 1
+  },
+  {
+   "fieldname": "devise",
+   "fieldtype": "Link",
+   "label": "Devise",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "taux_de_change",
+   "fieldtype": "Float",
+   "label": "Taux de change"
+  },
+  {
+   "fieldname": "suivi_section",
+   "fieldtype": "Section Break",
+   "label": "Suivi"
+  },
+  {
+   "default": "Estim\u00e9e",
+   "fieldname": "statut",
+   "fieldtype": "Select",
+   "label": "Statut",
+   "options": "Estim\u00e9e\nConfirm\u00e9e\nFactur\u00e9e\nSold\u00e9e"
+  },
+  {
+   "fieldname": "facture_dachat",
+   "fieldtype": "Link",
+   "label": "Facture d'achat",
+   "options": "Purchase Invoice"
+  },
+  {
+   "fieldname": "observation",
+   "fieldtype": "Small Text",
+   "label": "Observation",
+   "options": "Purchase Invoice"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-29 22:12:21.991927",
+ "modified_by": "Administrator",
+ "module": "Dealerp",
+ "name": "Expedition Expense",
+ "owner": "info@dealtonsite.ci",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

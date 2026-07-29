@@ -1,0 +1,202 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "EXP-.YYYY.-.######",
+ "creation": "2026-07-25 02:39:21.650198",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "dossier_section",
+  "deal_dossier",
+  "column_break_vhgp",
+  "op\u00e9ration_section",
+  "transit_type",
+  "operation_type",
+  "mode_transport",
+  "incoterm",
+  "transport_section",
+  "port_origin",
+  "port_destination",
+  "shipping_line",
+  "agency",
+  "eta",
+  "etd",
+  "marchandise_section",
+  "goods_description",
+  "finance_section",
+  "estimated_revenue",
+  "invoiced_revenue",
+  "total_cost",
+  "estimated_margin",
+  "actual_margin",
+  "profitability_percent"
+ ],
+ "fields": [
+  {
+   "fieldname": "dossier_section",
+   "fieldtype": "Section Break",
+   "label": "Dossier"
+  },
+  {
+   "fieldname": "deal_dossier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Num\u00e9ro Dossier",
+   "options": "Dossier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vhgp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "op\u00e9ration_section",
+   "fieldtype": "Section Break",
+   "label": "Op\u00e9ration"
+  },
+  {
+   "fieldname": "transit_type",
+   "fieldtype": "Link",
+   "label": "Type Transit ",
+   "options": "Type de transit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "operation_type",
+   "fieldtype": "Link",
+   "label": "Type d'op\u00e9ration",
+   "options": "Type operation"
+  },
+  {
+   "fieldname": "mode_transport",
+   "fieldtype": "Link",
+   "label": "Mode de transport",
+   "options": "Mode Transport"
+  },
+  {
+   "fieldname": "incoterm",
+   "fieldtype": "Link",
+   "label": "Incoterm",
+   "options": "Incoterm",
+   "reqd": 1
+  },
+  {
+   "fieldname": "transport_section",
+   "fieldtype": "Section Break",
+   "label": "Transport"
+  },
+  {
+   "fieldname": "port_origin",
+   "fieldtype": "Link",
+   "label": "Port d'origine",
+   "options": "Port"
+  },
+  {
+   "fieldname": "port_destination",
+   "fieldtype": "Link",
+   "label": "Port de destination",
+   "options": "Port"
+  },
+  {
+   "fieldname": "shipping_line",
+   "fieldtype": "Link",
+   "label": "Shipping Line / Compagnie maritime",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "agency",
+   "fieldtype": "Link",
+   "label": "Agence",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "eta",
+   "fieldtype": "Date",
+   "label": "ETA"
+  },
+  {
+   "fieldname": "etd",
+   "fieldtype": "Date",
+   "label": "ETD"
+  },
+  {
+   "fieldname": "marchandise_section",
+   "fieldtype": "Section Break",
+   "label": "Marchandise"
+  },
+  {
+   "fieldname": "goods_description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "finance_section",
+   "fieldtype": "Section Break",
+   "label": "Finance"
+  },
+  {
+   "fieldname": "estimated_revenue",
+   "fieldtype": "Currency",
+   "label": "CA pr\u00e9vu",
+   "read_only": 1
+  },
+  {
+   "fieldname": "invoiced_revenue",
+   "fieldtype": "Currency",
+   "label": "CA factur\u00e9",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Co\u00fbt total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "estimated_margin",
+   "fieldtype": "Currency",
+   "label": "Marge estim\u00e9e",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_margin",
+   "fieldtype": "Currency",
+   "label": "Marge r\u00e9elle",
+   "read_only": 1
+  },
+  {
+   "fieldname": "profitability_percent",
+   "fieldtype": "Percent",
+   "label": "Rentabilit\u00e9 (%)",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-29 22:12:19.986750",
+ "modified_by": "Administrator",
+ "module": "Dealerp",
+ "name": "Expedition",
+ "naming_rule": "Expression",
+ "owner": "info@dealtonsite.ci",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

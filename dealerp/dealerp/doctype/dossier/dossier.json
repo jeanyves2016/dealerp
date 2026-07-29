@@ -1,0 +1,112 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "DOS-.YYYY.-.#####",
+ "creation": "2026-07-24 07:05:08.510497",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "informations_g\u00e9n\u00e9rales_section",
+  "dossier_number",
+  "customer",
+  "company",
+  "type_de_dossier",
+  "owner_user",
+  "onglet_d\u00e9tails_section",
+  "customer_reference",
+  "internal_reference",
+  "description",
+  "priority"
+ ],
+ "fields": [
+  {
+   "fieldname": "informations_g\u00e9n\u00e9rales_section",
+   "fieldtype": "Section Break",
+   "label": "Informations g\u00e9n\u00e9rales"
+  },
+  {
+   "fieldname": "dossier_number",
+   "fieldtype": "Data",
+   "label": "N\u00b0 Dossier"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Client",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Soci\u00e9t\u00e9",
+   "options": "Company"
+  },
+  {
+   "fieldname": "type_de_dossier",
+   "fieldtype": "Link",
+   "label": "Type de dossier",
+   "options": "Type de dossier"
+  },
+  {
+   "fieldname": "owner_user",
+   "fieldtype": "Link",
+   "label": "Responsable",
+   "options": "User"
+  },
+  {
+   "fieldname": "onglet_d\u00e9tails_section",
+   "fieldtype": "Section Break",
+   "label": "Onglet d\u00e9tails"
+  },
+  {
+   "fieldname": "customer_reference",
+   "fieldtype": "Data",
+   "label": "R\u00e9f\u00e9rence client"
+  },
+  {
+   "fieldname": "internal_reference",
+   "fieldtype": "Data",
+   "label": "R\u00e9f\u00e9rence interne"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priorit\u00e9",
+   "options": "\nLow\nMedium\nHigh"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-29 21:04:42.822168",
+ "modified_by": "Administrator",
+ "module": "Dealerp",
+ "name": "Dossier",
+ "naming_rule": "Expression",
+ "owner": "info@dealtonsite.ci",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
