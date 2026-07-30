@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "EXP-.YYYY.-.######",
- "creation": "2026-07-25 02:39:21.650198",
+ "creation": "2026-07-29 22:36:28.239180",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -174,12 +174,12 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-29 22:12:19.986750",
+ "modified": "2026-07-29 22:36:28.239180",
  "modified_by": "Administrator",
  "module": "Dealerp",
  "name": "Expedition",
  "naming_rule": "Expression",
- "owner": "info@dealtonsite.ci",
+ "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
