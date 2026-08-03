@@ -1,0 +1,875 @@
+[33mcommit 069034844f99b740ad78e3e045da91e166f0da8e[m[33m ([m[1;34mgrafted[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Jean Yves Ahiba <ahibajeanyves@gmail.com>
+Date:   Thu Jul 23 19:51:26 2026 +0000
+
+    Remove GitHub Actions workflow
+
+[1mdiff --git a/.editorconfig b/.editorconfig[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b901702[m
+[1m--- /dev/null[m
+[1m+++ b/.editorconfig[m
+[36m@@ -0,0 +1,21 @@[m
+[32m+[m[32m# Root editor config file[m
+[32m+[m[32mroot = true[m
+[32m+[m
+[32m+[m[32m# Common settings[m
+[32m+[m[32m[*][m
+[32m+[m[32mend_of_line = lf[m
+[32m+[m[32minsert_final_newline = true[m
+[32m+[m[32mtrim_trailing_whitespace = true[m
+[32m+[m[32mcharset = utf-8[m
+[32m+[m
+[32m+[m[32m# python, js indentation settings[m
+[32m+[m[32m[{*.py,*.js,*.vue,*.css,*.scss,*.html}][m
+[32m+[m[32mindent_style = tab[m
+[32m+[m[32mindent_size = 4[m
+[32m+[m[32mmax_line_length = 99[m
+[32m+[m
+[32m+[m[32m# JSON files - mostly doctype schema files[m
+[32m+[m[32m[{*.json}][m
+[32m+[m[32minsert_final_newline = false[m
+[32m+[m[32mindent_style = space[m
+[32m+[m[32mindent_size = 2[m
+[1mdiff --git a/.eslintrc b/.eslintrc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c5e7d68[m
+[1m--- /dev/null[m
+[1m+++ b/.eslintrc[m
+[36m@@ -0,0 +1,124 @@[m
+[32m+[m[32m{[m
+[32m+[m	[32m"env": {[m
+[32m+[m		[32m"browser": true,[m
+[32m+[m		[32m"node": true,[m
+[32m+[m		[32m"es2022": true[m
+[32m+[m	[32m},[m
+[32m+[m	[32m"parserOptions": {[m
+[32m+[m		[32m"sourceType": "module"[m
+[32m+[m	[32m},[m
+[32m+[m	[32m"extends": "eslint:recommended",[m
+[32m+[m	[32m"rules": {[m
+[32m+[m		[32m"indent": "off",[m
+[32m+[m		[32m"brace-style": "off",[m
+[32m+[m		[32m"no-mixed-spaces-and-tabs": "off",[m
+[32m+[m		[32m"no-useless-escape": "off",[m
+[32m+[m		[32m"space-unary-ops": ["error", { "words": true }],[m
+[32m+[m		[32m"linebreak-style": "off",[m
+[32m+[m		[32m"quotes": ["off"],[m
+[32m+[m		[32m"semi": "off",[m
+[32m+[m		[32m"camelcase": "off",[m
+[32m+[m		[32m"no-unused-vars": "off",[m
+[32m+[m		[32m"no-console": ["warn"],[m
+[32m+[m		[32m"no-extra-boolean-cast": ["off"],[m
+[32m+[m		[32m"no-control-regex": ["off"],[m
+[32m+[m	[32m},[m
+[32m+[m	[32m"root": true,[m
+[32m+[m	[32m"globals": {[m
+[32m+[m		[32m"frappe": true,[m
+[32m+[m		[32m"Vue": true,[m
+[32m+[m		[32m"SetVueGlobals": true,[m
+[32m+[m		[32m"__": true,[m
+[32m+[m		[32m"repl": true,[m
+[32m+[m		[32m"Class": true,[m
+[32m+[m		[32m"locals": true,[m
+[32m+[m		[32m"cint": true,[m
+[32m+[m		[32m"cstr": true,[m
+[32m+[m		[32m"cur_frm": true,[m
+[32m+[m		[32m"cur_dialog": true,[m
+[32m+[m		[32m"cur_page": true,[m
+[32m+[m		[32m"cur_list": true,[m
+[32m+[m		[32m"cur_tree": true,[m
+[32m+[m		[32m"msg_dialog": true,[m
+[32m+[m		[32m"is_null": true,[m
+[32m+[m		[32m"in_list": true,[m
+[32m+[m		[32m"has_common": true,[m
+[32m+[m		[32m"posthog": true,[m
+[32m+[m		[32m"has_words": true,[m
+[32m+[m		[32m"validate_email": true,[m
+[32m+[m		[32m"open_web_template_values_editor": true,[m
+[32m+[m		[32m"validate_name": true,[m
+[32m+[m		[32m"validate_phone": true,[m
+[32m+[m		[32m"validate_url": true,[m
+[32m+[m		[32m"get_number_format": true,[m
+[32m+[m		[32m"format_number": true,[m
+[32m+[m		[32m"format_currency": true,[m
+[32m+[m		[32m"comment_when": true,[m
+[32m+[m		[32m"open_url_post": true,[m
+[32m+[m		[32m"toTitle": true,[m
+[32m+[m		[32m"lstrip": true,[m
+[32m+[m		[32m"rstrip": true,[m
+[32m+[m		[32m"strip": true,[m
+[32m+[m		[32m"strip_html": true,[m
+[32m+[m		[32m"replace_all": true,[m
+[32m+[m		[32m"flt": true,[m
+[32m+[m		[32m"precision": true,[m
+[32m+[m		[32m"CREATE": true,[m
+[32m+[m		[32m"AMEND": true,[m
+[32m+[m		[32m"CANCEL": true,[m
+[32m+[m		[32m"copy_dict": true,[m
+[32m+[m		[32m"get_number_format_info": true,[m
+[32m+[m		[32m"strip_number_groups": true,[m
+[32m+[m		[32m"print_table": true,[m
+[32m+[m		[32m"Layout": true,[m
+[32m+[m		[32m"web_form_settings": true,[m
+[32m+[m		[32m"$c": true,[m
+[32m+[m		[32m"$a": true,[m
+[32m+[m		[32m"$i": true,[m
+[32m+[m		[32m"$bg": true,[m
+[32m+[m		[32m"$y": true,[m
+[32m+[m		[32m"$c_obj": true,[m
+[32m+[m		[32m"refresh_many": true,[m
+[32m+[m		[32m"refresh_field": true,[m
+[32m+[m		[32m"toggle_field": true,[m
+[32m+[m		[32m"get_field_obj": true,[m
+[32m+[m		[32m"get_query_params": true,[m
+[32m+[m		[32m"unhide_field": true,[m
+[32m+[m		[32m"hide_field": true,[m
+[32m+[m		[32m"set_field_options": true,[m
+[32m+[m		[32m"getCookie": true,[m
+[32m+[m		[32m"getCookies": true,[m
+[32m+[m		[32m"get_url_arg": true,[m
+[32m+[m		[32m"md5": true,[m
+[32m+[m		[32m"$": true,[m
+[32m+[m		[32m"jQuery": true,[m
+[32m+[m		[32m"moment": true,[m
+[32m+[m		[32m"hljs": true,[m
+[32m+[m		[32m"Awesomplete": true,[m
+[32m+[m		[32m"Sortable": true,[m
+[32m+[m		[32m"Showdown": true,[m
+[32m+[m		[32m"Taggle": true,[m
+[32m+[m		[32m"Gantt": true,[m
+[32m+[m		[32m"Slick": true,[m
+[32m+[m		[32m"Webcam": true,[m
+[32m+[m		[32m"PhotoSwipe": true,[m
+[32m+[m		[32m"PhotoSwipeUI_Default": true,[m
+[32m+[m		[32m"io": true,[m
+[32m+[m		[32m"JsBarcode": true,[m
+[32m+[m		[32m"L": true,[m
+[32m+[m		[32m"Chart": true,[m
+[32m+[m		[32m"DataTable": true,[m
+[32m+[m		[32m"Cypress": true,[m
+[32m+[m		[32m"cy": true,[m
+[32m+[m		[32m"it": true,[m
+[32m+[m		[32m"describe": true,[m
+[32m+[m		[32m"expect": true,[m
+[32m+[m		[32m"context": true,[m
+[32m+[m		[32m"before": true,[m
+[32m+[m		[32m"beforeEach": true,[m
+[32m+[m		[32m"after": true,[m
+[32m+[m		[32m"qz": true,[m
+[32m+[m		[32m"localforage": true,[m
+[32m+[m		[32m"extend_cscript": true[m
+[32m+[m	[32m}[m
+[32m+[m[32m}[m
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ba04025[m
+[1m--- /dev/null[m
+[1m+++ b/.gitignore[m
+[36m@@ -0,0 +1,7 @@[m
+[32m+[m[32m.DS_Store[m
+[32m+[m[32m*.pyc[m
+[32m+[m[32m*.egg-info[m
+[32m+[m[32m*.swp[m
+[32m+[m[32mtags[m
+[32m+[m[32mnode_modules[m
+[32m+[m[32m__pycache__[m
+\ No newline at end of file[m
+[1mdiff --git a/.pre-commit-config.yaml b/.pre-commit-config.yaml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..91c71ee[m
+[1m--- /dev/null[m
+[1m+++ b/.pre-commit-config.yaml[m
+[36m@@ -0,0 +1,69 @@[m
+[32m+[m[32mexclude: 'node_modules|.git'[m
+[32m+[m[32mdefault_stages: [pre-commit][m
+[32m+[m[32mfail_fast: false[m
+[32m+[m
+[32m+[m
+[32m+[m[32mrepos:[m
+[32m+[m[32m  - repo: https://github.com/pre-commit/pre-commit-hooks[m
+[32m+[m[32m    rev: v5.0.0[m
+[32m+[m[32m    hooks:[m
+[32m+[m[32m      - id: trailing-whitespace[m
+[32m+[m[32m        files: "dealerp.*"[m
+[32m+[m[32m        exclude: ".*json$|.*txt$|.*csv|.*md|.*svg"[m
+[32m+[m[32m      - id: check-merge-conflict[m
+[32m+[m[32m      - id: check-ast[m
+[32m+[m[32m      - id: check-json[m
+[32m+[m[32m      - id: check-toml[m
+[32m+[m[32m      - id: check-yaml[m
+[32m+[m[32m      - id: debug-statements[m
+[32m+[m
+[32m+[m[32m  - repo: https://github.com/astral-sh/ruff-pre-commit[m
+[32m+[m[32m    rev: v0.8.1[m
+[32m+[m[32m    hooks:[m
+[32m+[m[32m      - id: ruff[m
+[32m+[m[32m        name: "Run ruff import sorter"[m
+[32m+[m[32m        args: ["--select=I", "--fix"][m
+[32m+[m
+[32m+[m[32m      - id: ruff[m
+[32m+[m[32m        name: "Run ruff linter"[m
+[32m+[m
+[32m+[m[32m      - id: ruff-format[m
+[32m+[m[32m        name: "Run ruff formatter"[m
+[32m+[m
+[32m+[m[32m  - repo: https://github.com/pre-commit/mirrors-prettier[m
+[32m+[m[32m    rev: v2.7.1[m
+[32m+[m[32m    hooks:[m
+[32m+[m[32m      - id: prettier[m
+[32m+[m[32m        types_or: [javascript, vue, scss][m
+[32m+[m[32m        # Ignore any files that might contain jinja / bundles[m
+[32m+[m[32m        exclude: |[m
+[32m+[m[32m            (?x)^([m
+[32m+[m[32m                dealerp/public/dist/.*|[m
+[32m+[m[32m                .*node_modules.*|[m
+[32m+[m[32m                .*boilerplate.*|[m
+[32m+[m[32m                dealerp/templates/includes/.*|[m
+[32m+[m[32m                dealerp/public/js/lib/.*[m
+[32m+[m[32m            )$[m
+[32m+[m
+[32m+[m
+[32m+[m[32m  - repo: https://github.com/pre-commit/mirrors-eslint[m
+[32m+[m[32m    rev: v8.44.0[m
+[32m+[m[32m    hooks:[m
+[32m+[m[32m      - id: eslint[m
+[32m+[m[32m        types_or: [javascript][m
+[32m+[m[32m        args: ['--quiet'][m
+[32m+[m[32m        # Ignore any files that might contain jinja / bundles[m
+[32m+[m[32m        exclude: |[m
+[32m+[m[32m            (?x)^([m
+[32m+[m[32m                dealerp/public/dist/.*|[m
+[32m+[m[32m                cypress/.*|[m
+[32m+[m[32m                .*node_modules.*|[m
+[32m+[m[32m                .*boilerplate.*|[m
+[32m+[m[32m                dealerp/templates/includes/.*|[m
+[32m+[m[32m                dealerp/public/js/lib/.*[m
+[32m+[m[32m            )$[m
+[32m+[m
+[32m+[m[32mci:[m
+[32m+[m[32m    autoupdate_schedule: weekly[m
+[32m+[m[32m    skip: [][m
+[32m+[m[32m    submodules: false[m
+[1mdiff --git a/README.md b/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3752989[m
+[1m--- /dev/null[m
+[1m+++ b/README.md[m
+[36m@@ -0,0 +1,41 @@[m
+[32m+[m[32m### Dealerp[m
+[32m+[m
+[32m+[m[32mDealERP Business Suite[m
+[32m+[m
+[32m+[m[32m### Installation[m
+[32m+[m
+[32m+[m[32mYou can install this app using the [bench](https://github.com/frappe/bench) CLI:[m
+[32m+[m
+[32m+[m[32m```bash[m
+[32m+[m[32mcd $PATH_TO_YOUR_BENCH[m
+[32m+[m[32mbench get-app $URL_OF_THIS_REPO --branch develop[m
+[32m+[m[32mbench install-app dealerp[m
+[32m+[m[32m```[m
+[32m+[m
+[32m+[m[32m### Contributing[m
+[32m+[m
+[32m+[m[32mThis app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:[m
+[32m+[m
+[32m+[m[32m```bash[m
+[32m+[m[32mcd apps/dealerp[m
+[32m+[m[32mpre-commit install[m
+[32m+[m[32m```[m
+[32m+[m
+[32m+[m[32mPre-commit is configured to use the following tools for checking and formatting your code:[m
+[32m+[m
+[32m+[m[32m- ruff[m
+[32m+[m[32m- eslint[m
+[32m+[m[32m- prettier[m
+[32m+[m[32m- pyupgrade[m
+[32m+[m
+[32m+[m[32m### CI[m
+[32m+[m
+[32m+[m[32mThis app can use GitHub Actions for CI. The following workflows are configured:[m
+[32m+[m
+[32m+[m[32m- CI: Installs this app and runs unit tests on every push to `develop` branch.[m
+[32m+[m[32m- Linters: Runs [Frappe Semgrep Rules](https://github.com/frappe/semgrep-rules) and [pip-audit](https://pypi.org/project/pip-audit/) on every pull request.[m
+[32m+[m
+[32m+[m
+[32m+[m[32m### License[m
+[32m+[m
+[32m+[m[32magpl-3.0[m
+[1mdiff --git a/dealerp/__init__.py b/dealerp/__init__.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f102a9c[m
+[1m--- /dev/null[m
+[1m+++ b/dealerp/__init__.py[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m__version__ = "0.0.1"[m
+[1mdiff --git a/dealerp/config/__init__.py b/dealerp/config/__init__.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/dealerp/dealerp/__init__.py b/dealerp/dealerp/__init__.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/dealerp/hooks.py b/dealerp/hooks.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..92c4513[m
+[1m--- /dev/null[m
+[1m+++ b/dealerp/hooks.py[m
+[36m@@ -0,0 +1,249 @@[m
+[32m+[m[32mapp_name = "dealerp"[m
+[32m+[m[32mapp_title = "Dealerp"[m
+[32m+[m[32mapp_publisher = "Dealtonsite"[m
+[32m+[m[32mapp_description = "DealERP Business Suite"[m
+[32m+[m[32mapp_email = "info@dealtonsite.ci"[m
+[32m+[m[32mapp_license = "agpl-3.0"[m
+[32m+[m
+[32m+[m[32m# Apps[m
+[32m+[m[32m# ------------------[m
+[32m+[m
+[32m+[m[32m# required_apps = [][m
+[32m+[m
+[32m+[m[32m# Each item in the list will be shown as an app in the apps page[m
+[32m+[m[32m# add_to_apps_screen = [[m
+[32m+[m[32m# 	{[m
+[32m+[m[32m# 		"name": "dealerp",[m
+[32m+[m[32m# 		"logo": "/assets/dealerp/logo.png",[m
+[32m+[m[32m# 		"title": "Dealerp",[m
+[32m+[m[32m# 		"route": "/dealerp",[m
+[32m+[m[32m# 		"has_permission": "dealerp.api.permission.has_app_permission"[m
+[32m+[m[32m# 	}[m
+[32m+[m[32m# ][m
+[32m+[m
+[32m+[m[32m# Includes in <head>[m
+[32m+[m[32m# ------------------[m
+[32m+[m
+[32m+[m[32m# include js, css files in header of desk.html[m
+[32m+[m[32m# app_include_css = "/assets/dealerp/css/dealerp.css"[m
+[32m+[m[32m# app_include_js = "/assets/dealerp/js/dealerp.js"[m
+[32m+[m
+[32m+[m[32m# include js, css files in header of web template[m
+[32m+[m[32m# web_include_css = "/assets/dealerp/css/dealerp.css"[m
+[32m+[m[32m# web_include_js = "/assets/dealerp/js/dealerp.js"[m
+[32m+[m
+[32m+[m[32m# include custom scss in every website theme (without file extension ".scss")[m
+[32m+[m[32m# website_theme_scss = "dealerp/public/scss/website"[m
+[32m+[m
+[32m+[m[32m# include js, css files in header of web form[m
+[32m+[m[32m# webform_include_js = {"doctype": "public/js/doctype.js"}[m
+[32m+[m[32m# webform_include_css = {"doctype": "public/css/doctype.css"}[m
+[32m+[m
+[32m+[m[32m# include js in page[m
+[32m+[m[32m# page_js = {"page" : "public/js/file.js"}[m
+[32m+[m
+[32m+[m[32m# include js in doctype views[m
+[32m+[m[32m# doctype_js = {"doctype" : "public/js/doctype.js"}[m
+[32m+[m[32m# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}[m
+[32m+[m[32m# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}[m
+[32m+[m[32m# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}[m
+[32m+[m
+[32m+[m[32m# Svg Icons[m
+[32m+[m[32m# ------------------[m
+[32m+[m[32m# include app icons in desk[m
+[32m+[m[32m# app_include_icons = "dealerp/public/icons.svg"[m
+[32m+[m
+[32m+[m[32m# Home Pages[m
+[32m+[m[32m# ----------[m
+[32m+[m
+[32m+[m[32m# application home page (will override Website Settings)[m
+[32m+[m[32m# home_page = "login"[m
+[32m+[m
+[32m+[m[32m# website user home page (by Role)[m
+[32m+[m[32m# role_home_page = {[m
+[32m+[m[32m# 	"Role": "home_page"[m
+[32m+[m[32m# }[m
+[32m+[m
+[32m+[m[32m# Generators[m
+[32m+[m[32m# ----------[m
+[32m+[m
+[32m+[m[32m# automatically create page for each record of this doctype[m
+[32m+[m[32m# website_generators = ["Web Page"][m
+[32m+[m
+[32m+[m[32m# Jinja[m
+[32m+[m[32m# ----------[m
+[32m+[m
+[32m+[m[32m# add methods and filters to jinja environment[m
+[32m+[m[32m# jinja = {[m
+[32m+[m[32m# 	"methods": "dealerp.utils.jinja_methods",[m
+[32m+[m[32m# 	"filters": "dealerp.utils.jinja_filters"[m
+[32m+[m[32m# }[m
+[32m+[m
+[32m+[m[32m# Installation[m
+[32m+[m[32m# ------------[m
+[32m+[m
+[32m+[m[32m# before_install = "dealerp.install.before_install"[m
+[32m+[m[32m# after_install = "dealerp.install.after_install"[m
+[32m+[m
+[32m+[m[32m# Uninstallation[m
+[32m+[m[32m# ------------[m
+[32m+[m
+[32m+[m[32m# before_uninstall = "dealerp.uninstall.before_uninstall"[m
+[32m+[m[32m# after_uninstall = "dealerp.uninstall.after_uninstall"[m
+[32m+[m
+[32m+[m[32m# Integration Setup[m
+[32m+[m[32m# ------------------[m
+[32m+[m[32m# To set up dependencies/integrations with other apps[m
+[32m+[m[32m# Name of the app being installed is passed as an argument[m
+[32m+[m
+[32m+[m[32m# before_app_install = "dealerp.utils.before_app_install"[m
+[32m+[m[32m# after_app_install = "dealerp.utils.after_app_install"[m
+[32m+[m
+[32m+[m[32m# Integration Cleanup[m
+[32m+[m[32m# -------------------[m
+[32m+[m[32m# To clean up dependencies/integrations with other apps[m
+[32m+[m[32m# Name of the app being uninstalled is passed as an argument[m
+[32m+[m
+[32m+[m[32m# before_app_uninstall = "dealerp.utils.before_app_uninstall"[m
+[32m+[m[32m# after_app_uninstall = "dealerp.utils.after_app_uninstall"[m
+[32m+[m
+[32m+[m[32m# Desk Notifications[m
+[32m+[m[32m# ------------------[m
+[32m+[m[32m# See frappe.core.notifications.get_notification_config[m
+[32m+[m
+[32m+[m[32m# notification_config = "dealerp.notifications.get_notification_config"[m
+[32m+[m
+[32m+[m[32m# Permissions[m
+[32m+[m[32m# -----------[m
+[32m+[m[32m# Permissions evaluated in scripted ways[m
+[32m+[m
+[32m+[m[32m# permission_query_conditions = {[m
+[32m+[m[32m# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",[m
+[32m+[m[32m# }[m
+[32m+[m[32m#[m
+[32m+[m[32m# has_permission = {[m
+[32m+[m[32m# 	"Event": "frappe.desk.doctype.event.event.has_permission",[m
+[32m+[m[32m# }[m
+[32m+[m
+[32m+[m[32m# DocType Class[m
+[32m+[m[32m# ---------------[m
+[32m+[m[32m# Override standard doctype classes[m
+[32m+[m
+[32m+[m[32m# override_doctype_class = {[m
+[32m+[m[32m# 	"ToDo": "custom_app.overrides.CustomToDo"[m
+[32m+[m[32m# }[m
+[32m+[m
+[32m+[m[32m# Document Events[m
+[32m+[m[32m# ---------------[m
+[32m+[m[32m# Hook on document methods and events[m
+[32m+[m
+[32m+[m[32m# doc_events = {[m
+[32m+[m[32m# 	"*": {[m
+[32m+[m[32m# 		"on_update": "method",[m
+[32m+[m[32m# 		"on_cancel": "method",[m
+[32m+[m[32m# 		"on_trash": "method"[m
+[32m+[m[32m# 	}[m
+[32m+[m[32m# }[m
+[32m+[m
+[32m+[m[32m# Scheduled Tasks[m
+[32m+[m[32m# ---------------[m
+[32m+[m
+[32m+[m[32m# scheduler_events = {[m
+[32m+[m[32m# 	"all": [[m
+[32m+[m[32m# 		"dealerp.tasks.all"[m
+[32m+[m[32m# 	],[m
+[32m+[m[32m# 	"daily": [[m
+[32m+[m[32m# 		"dealerp.tasks.daily"[m
+[32m+[m[32m# 	],[m
+[32m+[m[32m# 	"hourly": [[m
+[32m+[m[32m# 		"dealerp.tasks.hourly"[m
+[32m+[m[32m# 	],[m
+[32m+[m[32m# 	"weekly": [[m
+[32m+[m[32m# 		"dealerp.tasks.weekly"[m
+[32m+[m[32m# 	],[m
+[32m+[m[32m# 	"monthly": [[m
+[32m+[m[32m# 		"dealerp.tasks.monthly"[m
+[32m+[m[32m# 	],[m
+[32m+[m[32m# }[m
+[32m+[m
+[32m+[m[32m# Testing[m
+[32m+[m[32m# -------[m
+[32m+[m
+[32m+[m[32m# before_tests = "dealerp.install.before_tests"[m
+[32m+[m
+[32m+[m[32m# Overriding Methods[m
+[32m+[m[32m# ------------------------------[m
+[32m+[m[32m#[m
+[32m+[m[32m# override_whitelisted_methods = {[m
+[32m+[m[32m# 	"frappe.desk.doctype.event.event.get_events": "dealerp.event.get_events"[m
+[32m+[m[32m# }[m
+[32m+[m[32m#[m
+[32m+[m[32m# each overriding function accepts a `data` argument;[m
+[32m+[m[32m# generated from the base implementation of the doctype dashboard,[m
+[32m+[m[32m# along with any modifications made in other Frappe apps[m
+[32m+[m[32m# override_doctype_dashboards = {[m
+[32m+[m[32m# 	"Task": "dealerp.task.get_dashboard_data"[m
+[32m+[m[32m# }[m
+[32m+[m
+[32m+[m[32m# exempt linked doctypes from being automatically cancelled[m
+[32m+[m[32m#[m
+[32m+[m[32m# auto_cancel_exempted_doctypes = ["Auto Repeat"][m
+[32m+[m
+[32m+[m[32m# Ignore links to specified DocTypes when deleting documents[m
+[32m+[m[32m# -----------------------------------------------------------[m
+[32m+[m
+[32m+[m[32m# ignore_links_on_delete = ["Communication", "ToDo"][m
+[32m+[m
+[32m+[m[32m# Request Events[m
+[32m+[m[32m# ----------------[m
+[32m+[m[32m# before_request = ["dealerp.utils.before_request"][m
+[32m+[m[32m# after_request = ["dealerp.utils.after_request"][m
+[32m+[m
+[32m+[m[32m# Job Events[m
+[32m+[m[32m# ----------[m
+[32m+[m[32m# before_job = ["dealerp.utils.before_job"][m
+[32m+[m[32m# after_job = ["dealerp.utils.after_job"][m
+[32m+[m
+[32m+[m[32m# User Data Protection[m
+[32m+[m[32m# --------------------[m
+[32m+[m
+[32m+[m[32m# user_data_fields = [[m
+[32m+[m[32m# 	{[m
+[32m+[m[32m# 		"doctype": "{doctype_1}",[m
+[32m+[m[32m# 		"filter_by": "{filter_by}",[m
+[32m+[m[32m# 		"redact_fields": ["{field_1}", "{field_2}"],[m
+[32m+[m[32m# 		"partial": 1,[m
+[32m+[m[32m# 	},[m
+[32m+[m[32m# 	{[m
+[32m+[m[32m# 		"doctype": "{doctype_2}",[m
+[32m+[m[32m# 		"filter_by": "{filter_by}",[m
+[32m+[m[32m# 		"partial": 1,[m
+[32m+[m[32m# 	},[m
+[32m+[m[32m# 	{[m
+[32m+[m[32m# 		"doctype": "{doctype_3}",[m
+[32m+[m[32m# 		"strict": False,[m
+[32m+[m[32m# 	},[m
+[32m+[m[32m# 	{[m
+[32m+[m[32m# 		"doctype": "{doctype_4}"[m
+[32m+[m[32m# 	}[m
+[32m+[m[32m# ][m
+[32m+[m
+[32m+[m[32m# Authentication and authorization[m
+[32m+[m[32m# --------------------------------[m
+[32m+[m
+[32m+[m[32m# auth_hooks = [[m
+[32m+[m[32m# 	"dealerp.auth.validate"[m
+[32m+[m[32m# ][m
+[32m+[m
+[32m+[m[32m# Automatically update python controller files with type annotations for this app.[m
+[32m+[m[32m# export_python_type_annotations = True[m
+[32m+[m
+[32m+[m[32m# default_log_clearing_doctypes = {[m
+[32m+[m[32m# 	"Logging DocType Name": 30  # days to retain logs[m
+[32m+[m[32m# }[m
+[32m+[m
+[32m+[m[32m# Translation[m
+[32m+[m[32m# ------------[m
+[32m+[m[32m# List of apps whose translatable strings should be excluded from this app's translations.[m
+[32m+[m[32m# ignore_translatable_strings_from = [][m
+[32m+[m
+[1mdiff --git a/dealerp/modules.txt b/dealerp/modules.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..612c8e6[m
+[1m--- /dev/null[m
+[1m+++ b/dealerp/modules.txt[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32mDealerp[m
+\ No newline at end of file[m
+[1mdiff --git a/dealerp/patches.txt b/dealerp/patches.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f15c3a9[m
+[1m--- /dev/null[m
+[1m+++ b/dealerp/patches.txt[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m[32m[pre_model_sync][m
+[32m+[m[32m# Patches added in this section will be executed before doctypes are migrated[m
+[32m+[m[32m# Read docs to understand patches: https://frappeframework.com/docs/v14/user/en/database-migrations[m
+[32m+[m
+[32m+[m[32m[post_model_sync][m
+[32m+[m[32m# Patches added in this section will be executed after doctypes are migrated[m
+\ No newline at end of file[m
+[1mdiff --git a/dealerp/patches/__init__.py b/dealerp/patches/__init__.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/dealerp/public/.gitkeep b/dealerp/public/.gitkeep[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/dealerp/templates/__init__.py b/dealerp/templates/__init__.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/dealerp/templates/pages/__init__.py b/dealerp/templates/pages/__init__.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/license.txt b/license.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..0ad25db[m
+[1m--- /dev/null[m
+[1m+++ b/license.txt[m
+[36m@@ -0,0 +1,661 @@[m
+[32m+[m[32m                    GNU AFFERO GENERAL PUBLIC LICENSE[m
+[32m+[m[32m                       Version 3, 19 November 2007[m
+[32m+[m
+[32m+[m[32m Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>[m
+[32m+[m[32m Everyone is permitted to copy and distribute verbatim copies[m
+[32m+[m[32m of this license document, but changing it is not allowed.[m
+[32m+[m
+[32m+[m[32m                            Preamble[m
+[32m+[m
+[32m+[m[32m  The GNU Affero General Public License is a free, copyleft license for[m
+[32m+[m[32msoftware and other kinds of works, specifically designed to ensure[m
+[32m+[m[32mcooperation with the community in the case of network server software.[m
+[32m+[m
+[32m+[m[32m  The licenses for most software and other practical works are designed[m
+[32m+[m[32mto take away your freedom to share and change the works.  By contrast,[m
+[32m+[m[32mour General Public Licenses are intended to guarantee your freedom to[m
+[32m+[m[32mshare and change all versions of a program--to make sure it remains free[m
+[32m+[m[32msoftware for all its users.[m
+[32m+[m
+[32m+[m[32m  When we speak of free software, we are referring to freedom, not[m
+[32m+[m[32mprice.  Our General Public Licenses are designed to make sure that you[m
+[32m+[m[32mhave the freedom to distribute copies of free software (and charge for[m
+[32m+[m[32mthem if you wish), that you receive source code or can get it if you[m
+[32m+[m[32mwant it, that you can change the software or use pieces of it in new[m
+[32m+[m[32mfree programs, and that you know you can do these things.[m
+[32m+[m
+[32m+[m[32m  Developers that use our General Public Licenses protect your rights[m
+[32m+[m[32mwith two steps: (1) assert copyright on the software, and (2) offer[m
+[32m+[m[32myou this License which gives you legal permission to copy, distribute[m
+[32m+[m[32mand/or modify the software.[m
+[32m+[m
+[32m+[m[32m  A secondary benefit of defending all users' freedom is that[m
+[32m+[m[32mimprovements made in alternate versions of the program, if they[m
+[32m+[m[32mreceive widespread use, become available for other developers to[m
+[32m+[m[32mincorporate.  Many developers of free software are heartened and[m
+[32m+[m[32mencouraged by the resulting cooperation.  However, in the case of[m
+[32m+[m[32msoftware used on network servers, this result may fail to come about.[m
+[32m+[m[32mThe GNU General Public License permits making a modified version and[m
+[32m+[m[32mletting the public access it on a server without ever releasing its[m
+[32m+[m[32msource code to the public.[m
+[32m+[m
+[32m+[m[32m  The GNU Affero General Public License is designed specifically to[m
+[32m+[m[32mensure that, in such cases, the modified source code becomes available[m
+[32m+[m[32mto the community.  It requires the operator of a network server to[m
+[32m+[m[32mprovide the source code of the modified version running there to the[m
+[32m+[m[32musers of that server.  Therefore, public use of a modified version, on[m
+[32m+[m[32ma publicly accessible server, gives the public access to the source[m
+[32m+[m[32mcode of the modified version.[m
+[32m+[m
+[32m+[m[32m  An older license, called the Affero General Public License and[m
+[32m+[m[32mpublished by Affero, was designed to accomplish similar goals.  This is[m
+[32m+[m[32ma different license, not a version of the Affero GPL, but Affero has[m
+[32m+[m[32mreleased a new version of the Affero GPL which permits relicensing under[m
+[32m+[m[32mthis license.[m
+[32m+[m
+[32m+[m[32m  The precise terms and conditions for copying, distribution and[m
+[32m+[m[32mmodification follow.[m
+[32m+[m
+[32m+[m[32m                       TERMS AND CONDITIONS[m
+[32m+[m
+[32m+[m[32m  0. Definitions.[m
+[32m+[m
+[32m+[m[32m  "This License" refers to version 3 of the GNU Affero General Public License.[m
+[32m+[m
+[32m+[m[32m  "Copyright" also means copyright-like laws that apply to other kinds of[m
+[32m+[m[32mworks, such as semiconductor masks.[m
+[32m+[m
+[32m+[m[32m  "The Program" refers to any copyrightable work licensed under this[m
+[32m+[m[32mLicense.  Each licensee is addressed as "you".  "Licensees" and[m
+[32m+[m[32m"recipients" may be individuals or organizations.[m
+[32m+[m
+[32m+[m[32m  To "modify" a work means to copy from or adapt all or part of the work[m
+[32m+[m[32min a fashion requiring copyright permission, other than the making of an[m
+[32m+[m[32mexact copy.  The resulting work is called a "modified version" of the[m
+[32m+[m[32mearlier work or a work "based on" the earlier work.[m
+[32m+[m
+[32m+[m[32m  A "covered work" means either the unmodified Program or a work based[m
+[32m+[m[32mon the Program.[m
+[32m+[m
+[32m+[m[32m  To "propagate" a work means to do anything with it that, without[m
+[32m+[m[32mpermission, would make you directly or secondarily liable for[m
+[32m+[m[32minfringement under applicable copyright law, except executing it on a[m
+[32m+[m[32mcomputer or modifying a private copy.  Propagation includes copying,[m
+[32m+[m[32mdistribution (with or without modification), making available to the[m
+[32m+[m[32mpublic, and in some countries other activities as well.[m
+[32m+[m
+[32m+[m[32m  To "convey" a work means any kind of propagation that enables other[m
+[32m+[m[32mparties to make or receive copies.  Mere interaction with a user through[m
+[32m+[m[32ma computer network, with no transfer of a copy, is not conveying.[m
+[32m+[m
+[32m+[m[32m  An interactive user interface displays "Appropriate Legal Notices"[m
+[32m+[m[32mto the extent that it includes a convenient and prominently visible[m
+[32m+[m[32mfeature that (1) displays an appropriate copyright notice, and (2)[m
+[32m+[m[32mtells the user that there is no warranty for the work (except to the[m
+[32m+[m[32mextent that warranties are provided), that licensees may convey the[m
+[32m+[m[32mwork under this License, and how to view a copy of this License.  If[m
+[32m+[m[32mthe interface presents a list of user commands or options, such as a[m
+[32m+[m[32mmenu, a prominent item in the list meets this criterion.[m
+[32m+[m
+[32m+[m[32m  1. Source Code.[m
+[32m+[m
+[32m+[m[32m  The "source code" for a work means the preferred form of the work[m
+[32m+[m[32mfor making modifications to it.  "Object code" means any non-source[m
+[32m+[m[32mform of a work.[m
+[32m+[m
+[32m+[m[32m  A "Standard Interface" means an interface that either is an official[m
+[32m+[m[32mstandard defined by a recognized standards body, or, in the case of[m
+[32m+[m[32minterfaces specified for a particular programming language, one that[m
+[32m+[m[32mis widely used among developers working in that language.[m
+[32m+[m
+[32m+[m[32m  The "System Libraries" of an executable work include anything, other[m
+[32m+[m[32mthan the work as a whole, that (a) is included in the normal form of[m
+[32m+[m[32mpackaging a Major Component, but which is not part of that Major[m
+[32m+[m[32mComponent, and (b) serves only to enable use of the work with that[m
+[32m+[m[32mMajor Component, or to implement a Standard Interface for which an[m
+[32m+[m[32mimplementation is available to the public in source code form.  A[m
+[32m+[m[32m"Major Component", in this context, means a major essential component[m
+[32m+[m[32m(kernel, window system, and so on) of the specific operating system[m
+[32m+[m[32m(if any) on which the executable work runs, or a compiler used to[m
+[32m+[m[32mproduce the work, or an object code interpreter used to run it.[m
+[32m+[m
+[32m+[m[32m  The "Corresponding Source" for a work in object code form means all[m
+[32m+[m[32mthe source code needed to generate, install, and (for an executable[m
+[32m+[m[32mwork) run the object code and to modify the work, including scripts to[m
+[32m+[m[32mcontrol those activities.  However, it does not include the work's[m
+[32m+[m[32mSystem Libraries, or general-purpose tools or generally available free[m
+[32m+[m[32mprograms which are used unmodified in performing those activities but[m
+[32m+[m[32mwhich are not part of the work.  For example, Corresponding Source[m
+[32m+[m[32mincludes interface definition files associated with source files for[m
+[32m+[m[32mthe work, and the source code for shared libraries and dynamically[m
+[32m+[m[32mlinked subprograms that the work is specifically designed to require,[m
+[32m+[m[32msuch as by intimate data communication or control flow between those[m
+[32m+[m[32msubprograms and other parts of the work.[m
+[32m+[m
+[32m+[m[32m  The Corresponding Source need not include anything that users[m
+[32m+[m[32mcan regenerate automatically from other parts of the Corresponding[m
+[32m+[m[32mSource.[m
+[32m+[m
+[32m+[m[32m  The Corresponding Source for a work in source code form is that[m
+[32m+[m[32msame work.[m
+[32m+[m
+[32m+[m[32m  2. Basic Permissions.[m
+[32m+[m
+[32m+[m[32m  All rights granted under this License are granted for the term of[m
+[32m+[m[32mcopyright on the Program, and are irrevocable provided the stated[m
+[32m+[m[32mconditions are met.  This License explicitly affirms your unlimited[m
+[32m+[m[32mpermission to run the unmodified Program.  The output from running a[m
+[32m+[m[32mcovered work is covered by this License only if the output, given its[m
+[32m+[m[32mcontent, constitutes a covered work.  This License acknowledges your[m
+[32m+[m[32mrights of fair use or other equivalent, as provided by copyright law.[m
+[32m+[m
+[32m+[m[32m  You may make, run and propagate covered works that you do not[m
+[32m+[m[32mconvey, without conditions so long as your license otherwise remains[m
+[32m+[m[32min force.  You may convey covered works to others for the sole purpose[m
+[32m+[m[32mof having them make modifications exclusively for you, or provide you[m
+[32m+[m[32mwith facilities for running those works, provided that you comply with[m
+[32m+[m[32mthe terms of this License in conveying all material for which you do[m
+[32m+[m[32mnot control copyright.  Those thus making or running the covered works[m
+[32m+[m[32mfor you must do so exclusively on your behalf, under your direction[m
+[32m+[m[32mand control, on terms that prohibit them from making any copies of[m
+[32m+[m[32myour copyrighted material outside their relationship with you.[m
+[32m+[m
+[32m+[m[32m  Conveying under any other circumstances is permitted solely under[m
+[32m+[m[32mthe conditions stated below.  Sublicensing is not allowed; section 10[m
+[32m+[m[32mmakes it unnecessary.[m
+[32m+[m
+[32m+[m[32m  3. Protecting Users' Legal Rights From Anti-Circumvention Law.[m
+[32m+[m
+[32m+[m[32m  No covered work shall be deemed part of an effective technological[m
+[32m+[m[32mmeasure under any applicable law fulfilling obligations under article[m
+[32m+[m[32m11 of the WIPO copyright treaty adopted on 20 December 1996, or[m
+[32m+[m[32msimilar laws prohibiting or restricting circumvention of such[m
+[32m+[m[32mmeasures.[m
+[32m+[m
+[32m+[m[32m  When you convey a covered work, you waive any legal power to forbid[m
+[32m+[m[32mcircumvention of technological measures to the extent such circumvention[m
+[32m+[m[32mis effected by exercising rights under this License with respect to[m
+[32m+[m[32mthe covered work, and you disclaim any intention to limit operation or[m
+[32m+[m[32mmodification of the work as a means of enforcing, against the work's[m
+[32m+[m[32musers, your or third parties' legal rights to forbid circumvention of[m
+[32m+[m[32mtechnological measures.[m
+[32m+[m
+[32m+[m[32m  4. Conveying Verbatim Copies.[m
+[32m+[m
+[32m+[m[32m  You may convey verbatim copies of the Program's source code as you[m
+[32m+[m[32mreceive it, in any medium, provided that you conspicuously and[m
+[32m+[m[32mappropriately publish on each copy an appropriate copyright notice;[m
+[32m+[m[32mkeep intact all notices stating that this License and any[m
+[32m+[m[32mnon-permissive terms added in accord with section 7 apply to the code;[m
+[32m+[m[32mkeep intact all notices of the absence of any warranty; and give all[m
+[32m+[m[32mrecipients a copy of this License along with the Program.[m
+[32m+[m
+[32m+[m[32m  You may charge any price or no price for each copy that you convey,[m
+[32m+[m[32mand you may offer support or warranty protection for a fee.[m
+[32m+[m
+[32m+[m[32m  5. Conveying Modified Source Versions.[m
+[32m+[m
+[32m+[m[32m  You may convey a work based on the Program, or the modifications to[m
+[32m+[m[32mproduce it from the Program, in the form of source code under the[m
+[32m+[m[32mterms of section 4, provided that you also meet all of these conditions:[m
+[32m+[m
+[32m+[m[32m    a) The work must carry prominent notices stating that you modified[m
+[32m+[m[32m    it, and giving a relevant date.[m
+[32m+[m
+[32m+[m[32m    b) The work must carry prominent notices stating that it is[m
+[32m+[m[32m    released under this License and any conditions added under section[m
+[32m+[m[32m    7.  This requirement modifies the requirement in section 4 to[m
+[32m+[m[32m    "keep intact all notices".[m
+[32m+[m
+[32m+[m[32m    c) You must license the entire work, as a whole, under this[m
+[32m+[m[32m    License to anyone who comes into possession of a copy.  This[m
+[32m+[m[32m    License will therefore apply, along with any applicable section 7[m
+[32m+[m[32m    additional terms, to the whole of the work, and all its parts,[m
+[32m+[m[32m    regardless of how they are packaged.  This License gives no[m
+[32m+[m[32m    permission to license the work in any other way, but it does not[m
+[32m+[m[32m    invalidate such permission if you have separately received it.[m
+[32m+[m
+[32m+[m[32m    d) If the work has interactive user interfaces, each must display[m
+[32m+[m[32m    Appropriate Legal Notices; however, if the Program has interactive[m
+[32m+[m[32m    interfaces that do not display Appropriate Legal Notices, your[m
+[32m+[m[32m    work need not make them do so.[m
+[32m+[m
+[32m+[m[32m  A compilation of a covered work with other separate and independent[m
+[32m+[m[32mworks, which are not by their nature extensions of the covered work,[m
+[32m+[m[32mand which are not combined with it such as to form a larger program,[m
+[32m+[m[32min or on a volume of a storage or distribution medium, is called an[m
+[32m+[m[32m"aggregate" if the compilation and its resulting copyright are not[m
+[32m+[m[32mused to limit the access or legal rights of the compilation's users[m
+[32m+[m[32mbeyond what the individual works permit.  Inclusion of a covered work[m
+[32m+[m[32min an aggregate does not cause this License to apply to the other[m
+[32m+[m[32mparts of the aggregate.[m
+[32m+[m
+[32m+[m[32m  6. Conveying Non-Source Forms.[m
+[32m+[m
+[32m+[m[32m  You may convey a covered work in object code form under the terms[m
+[32m+[m[32mof sections 4 and 5, provided that you also convey the[m
+[32m+[m[32mmachine-readable Corresponding Source under the terms of this License,[m
+[32m+[m[32min one of these ways:[m
+[32m+[m
+[32m+[m[32m    a) Convey the object code in, or embodied in, a physical product[m
+[32m+[m[32m    (including a physical distribution medium), accompanied by the[m
+[32m+[m[32m    Corresponding Source fixed on a durable physical medium[m
+[32m+[m[32m    customarily used for software interchange.[m
+[32m+[m
+[32m+[m[32m    b) Convey the object code in, or embodied in, a physical product[m
+[32m+[m[32m    (including a physical distribution medium), accompanied by a[m
+[32m+[m[32m    written offer, valid for at least three years and valid for as[m
+[32m+[m[32m    long as you offer spare parts or customer support for that product[m
+[32m+[m[32m    model, to give anyone who possesses the object code either (1) a[m
+[32m+[m[32m    copy of the Corresponding Source for all the software in the[m
+[32m+[m[32m    product that is covered by this License, on a durable physical[m
+[32m+[m[32m    medium customarily used for software interchange, for a price no[m
+[32m+[m[32m    more than your reasonable cost of physically performing this[m
+[32m+[m[32m    conveying of source, or (2) access to copy the[m
+[32m+[m[32m    Corresponding Source from a network server at no charge.[m
+[32m+[m
+[32m+[m[32m    c) Convey individual copies of the object code with a copy of the[m
+[32m+[m[32m    written offer to provide the Corresponding Source.  This[m
+[32m+[m[32m    alternative is allowed only occasionally and noncommercially, and[m
+[32m+[m[32m    only if you received the object code with such an offer, in accord[m
+[32m+[m[32m    with subsection 6b.[m
+[32m+[m
+[32m+[m[32m    d) Convey the object code by offering access from a designated[m
+[32m+[m[32m    place (gratis or for a charge), and offer equivalent access to the[m
+[32m+[m[32m    Corresponding Source in the same way through the same place at no[m
+[32m+[m[32m    further charge.  You need not require recipients to copy the[m
+[32m+[m[32m    Corresponding Source along with the object code.  If the place to[m
+[32m+[m[32m    copy the object code is a network server, the Corresponding Source[m
+[32m+[m[32m    may be on a different server (operated by you or a third party)

@@ -1,9 +1,18 @@
-# Copyright (c) 2026, Dealtonsite and contributors
-# For license information, please see license.txt
-
-# import frappe
 from frappe.model.document import Document
 
 
 class Dossier(Document):
-	pass
+    pass
+
+
+def get_dashboard_data(data):
+    data["transactions"] = [
+        {
+            "label": "Transit",
+            "items": [
+                "Expedition",
+            ],
+        }
+    ]
+
+    return data

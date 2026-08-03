@@ -39,11 +39,11 @@
   },
   {
    "fieldname": "deal_dossier",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Num\u00e9ro Dossier",
-   "options": "Dossier",
-   "reqd": 1
+ "fieldtype": "Link",
+ "read_only": 1,
+ "in_list_view": 1,
+ "label": "Num\u00e9ro Dossier",
+ "options": "Dossier"
   },
   {
    "fieldname": "column_break_vhgp",
