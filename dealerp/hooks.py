@@ -248,3 +248,22 @@ app_license = "agpl-3.0"
 # ignore_translatable_strings_from = []
 
 
+
+doc_events = {
+    "Purchase Invoice": {
+        "on_submit": "dealerp.purchase_invoice_hooks.on_submit",
+        "on_cancel": "dealerp.purchase_invoice_hooks.on_cancel",
+        "on_update_after_submit": "dealerp.purchase_invoice_hooks.on_update_after_submit",
+        "on_trash": "dealerp.purchase_invoice_hooks.on_trash",
+    },
+    "Sales Invoice": {
+        "on_submit": "dealerp.sales_invoice_hooks.on_submit",
+        "on_cancel": "dealerp.sales_invoice_hooks.on_cancel",
+        "on_update_after_submit": "dealerp.sales_invoice_hooks.on_update_after_submit",
+        "on_trash": "dealerp.sales_invoice_hooks.on_trash",
+    }
+}
+
+doctype_js = {
+    "Expedition": "public/js/expedition.js",
+}
