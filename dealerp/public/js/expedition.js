@@ -7,7 +7,7 @@ frappe.ui.form.on("Expedition", {
 
         frm.add_custom_button(__("Facture Client"), () => {
             frappe.new_doc("Sales Invoice", {
-                custom_expédition__shipment: frm.doc.name
+                custom_expedition_shipment: frm.doc.name
             });
         }, __("Finance"));
 

@@ -4,20 +4,20 @@ from dealerp.financial import recalculate_expedition
 
 def on_submit(doc, method):
     frappe.log_error(
-        f"SUBMIT - {doc.name} - {doc.custom_expédition__shipment}",
+        f"SUBMIT - {doc.name} - {doc.custom_expedition_shipment}",
         "DEALERP SALES HOOK"
     )
-    if doc.custom_expédition__shipment:
-        recalculate_expedition(doc.custom_expédition__shipment)
+    if doc.custom_expedition_shipment:
+        recalculate_expedition(doc.custom_expedition_shipment)
 
 
 def on_cancel(doc, method):
     frappe.log_error(
-        f"CANCEL - {doc.name} - {doc.custom_expédition__shipment}",
+        f"CANCEL - {doc.name} - {doc.custom_expedition_shipment}",
         "DEALERP SALES HOOK"
     )
-    if doc.custom_expédition__shipment:
-        recalculate_expedition(doc.custom_expédition__shipment)
+    if doc.custom_expedition_shipment:
+        recalculate_expedition(doc.custom_expedition_shipment)
 
 
 def on_update_after_submit(doc, method):

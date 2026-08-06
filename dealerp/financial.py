@@ -13,7 +13,7 @@ def recalculate_expedition(expedition_name):
         SELECT COALESCE(SUM(base_grand_total),0)
         FROM `tabSales Invoice`
         WHERE docstatus=1
-        AND `custom_expédition__shipment`=%s
+        AND `custom_expedition_shipment`=%s
     """, expedition_name)[0][0]
 
     actual_margin = invoiced_revenue - total_cost

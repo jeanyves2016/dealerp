@@ -22,7 +22,7 @@ def recalculate_expedition(expedition_name: str):
         SELECT COALESCE(SUM(grand_total),0)
         FROM `tabSales Invoice`
         WHERE docstatus = 1
-        AND custom_expédition__shipment=%s
+        AND custom_expedition_shipment=%s
     """, expedition_name)[0][0])
 
     expedition.db_set("total_cost", purchase_total)
@@ -66,7 +66,7 @@ def get_financial_details(expedition_name):
         "Sales Invoice",
         filters={
             "docstatus": 1,
-            "custom_expédition__shipment": expedition_name,
+            "custom_expedition_shipment": expedition_name,
         },
         fields=[
             "name",
