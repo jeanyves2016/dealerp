@@ -33,6 +33,7 @@ frappe.ui.form.on("Expedition", {
                                 <th>Facture</th>
                                 <th>Client</th>
                                 <th>Montant</th>
+                                <th>Statut</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,6 +45,7 @@ frappe.ui.form.on("Expedition", {
                             <td><a href="/app/sales-invoice/${row.name}">${row.name}</a></td>
                             <td>${row.customer}</td>
                             <td style="text-align:right">${format_currency(row.grand_total)}</td>
+                            <td>${row.status}</td>
                         </tr>
                     `;
                 });
@@ -59,6 +61,7 @@ frappe.ui.form.on("Expedition", {
                                 <th>Facture</th>
                                 <th>Fournisseur</th>
                                 <th>Montant</th>
+                                <th>Statut</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,6 +73,7 @@ frappe.ui.form.on("Expedition", {
                             <td><a href="/app/purchase-invoice/${row.name}">${row.name}</a></td>
                             <td>${row.supplier}</td>
                             <td style="text-align:right">${format_currency(row.grand_total)}</td>
+                            <td>${row.status}</td>
                         </tr>
                     `;
                 });
