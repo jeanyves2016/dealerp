@@ -55,6 +55,7 @@ def get_financial_details(expedition_name):
             "name",
             "supplier",
             "posting_date",
+            "due_date",
             "grand_total",
             "status",
         ],
@@ -71,6 +72,7 @@ def get_financial_details(expedition_name):
             "name",
             "customer",
             "posting_date",
+            "due_date",
             "grand_total",
             "status",
         ],
@@ -81,3 +83,43 @@ def get_financial_details(expedition_name):
         "purchase_invoices": purchase_invoices,
         "sales_invoices": sales_invoices,
     }
+
+
+@frappe.whitelist()
+def get_dossier_dashboard(dossier_name):
+
+    expeditions = frappe.get_all(
+        "Expedition",
+        filters={
+            "deal_dossier": dossier_name
+        },
+        fields=[
+            "name",
+            "operation_type",
+            "mode_transport",
+            "invoiced_revenue",
+            "total_cost",
+            "actual_margin",
+            "profitability_percent"
+        ],
+        order_by="creation asc"
+    )
+
+    dashboard = {
+        "expedition_count": len(expeditions),
+        "invoiced_revenue": sum(x.invoiced_revenue or 0 for x in expeditions),
+        "total_cost": sum(x.total_cost or 0 for x in expeditions),
+        "actual_margin": sum(x.actual_margin or 0 for x in expeditions),
+        "expeditions": expeditions,
+    }
+
+    if dashboard["invoiced_revenue"]:
+        dashboard["profitability_percent"] = round(
+            dashboard["actual_margin"] * 100 / dashboard["invoiced_revenue"],
+            2,
+        )
+    else:
+        dashboard["profitability_percent"] = 0
+
+    return dashboard
+

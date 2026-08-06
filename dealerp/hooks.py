@@ -266,4 +266,5 @@ doc_events = {
 
 doctype_js = {
     "Expedition": "public/js/expedition.js",
+    "Dossier": "public/js/dossier.js",
 }
