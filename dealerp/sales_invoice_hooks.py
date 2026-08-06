@@ -1,8 +1,14 @@
 import frappe
+from dealerp.validation import validate_same_company
 from dealerp.financial import recalculate_expedition
 
 
 def on_submit(doc, method):
+
+    validate_same_company(
+        doc,
+        doc.custom_expedition_shipment
+    )
     frappe.log_error(
         f"SUBMIT - {doc.name} - {doc.custom_expedition_shipment}",
         "DEALERP SALES HOOK"
