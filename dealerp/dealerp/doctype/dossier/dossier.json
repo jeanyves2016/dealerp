@@ -16,7 +16,10 @@
   "customer_reference",
   "internal_reference",
   "description",
-  "priority"
+  "priority",
+  "commercial_section",
+  "quotation",
+  "sales_order"
  ],
  "fields": [
   {
@@ -78,6 +81,23 @@
    "fieldtype": "Select",
    "label": "Priorit\u00e9",
    "options": "\nLow\nMedium\nHigh"
+  },
+  {
+   "fieldname": "commercial_section",
+   "fieldtype": "Section Break",
+   "label": "Origine commerciale"
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "Devis",
+   "options": "Quotation"
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "Commande client",
+   "options": "Sales Order"
   }
  ],
  "grid_page_length": 50,
