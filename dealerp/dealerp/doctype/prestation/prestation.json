@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-08 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "dossier",
+  "prestation_type",
+  "expedition",
+  "column_break_1",
+  "status",
+  "priority",
+  "responsable",
+  "date_debut",
+  "date_echeance",
+  "finance_section",
+  "total_cost",
+  "invoiced_revenue",
+  "actual_margin",
+  "profitability_percent"
+ ],
+ "fields": [
+  {
+   "fieldname": "dossier",
+   "fieldtype": "Link",
+   "label": "Dossier",
+   "options": "Dossier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "prestation_type",
+   "fieldtype": "Link",
+   "label": "Type de prestation",
+   "options": "Prestation Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expedition",
+   "fieldtype": "Link",
+   "label": "Expédition",
+   "options": "Expedition"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Statut",
+   "options": "Brouillon\nÀ faire\nEn cours\nEn attente\nTerminé\nAnnulé",
+   "default": "Brouillon",
+   "reqd": 1
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priorité",
+   "options": "Basse\nNormale\nHaute\nUrgente",
+   "default": "Normale"
+  },
+  {
+   "fieldname": "responsable",
+   "fieldtype": "Link",
+   "label": "Responsable",
+   "options": "User"
+  },
+  {
+   "fieldname": "date_debut",
+   "fieldtype": "Date",
+   "label": "Date de début"
+  },
+  {
+   "fieldname": "date_echeance",
+   "fieldtype": "Date",
+   "label": "Date d'échéance"
+  },
+  {
+   "fieldname": "finance_section",
+   "fieldtype": "Section Break",
+   "label": "Synthèse financière"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Coût total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "invoiced_revenue",
+   "fieldtype": "Currency",
+   "label": "Chiffre d'affaires facturé",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_margin",
+   "fieldtype": "Currency",
+   "label": "Marge réelle",
+   "read_only": 1
+  },
+  {
+   "fieldname": "profitability_percent",
+   "fieldtype": "Percent",
+   "label": "Rentabilité",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-08 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "DealERP",
+ "name": "Prestation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
