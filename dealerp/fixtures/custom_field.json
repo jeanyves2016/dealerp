@@ -1,0 +1,11 @@
+[
+  {
+    "doctype": "Custom Field",
+    "dt": "Task",
+    "fieldname": "custom_prestation",
+    "fieldtype": "Link",
+    "label": "Prestation",
+    "options": "Prestation",
+    "insert_after": "project"
+  }
+]

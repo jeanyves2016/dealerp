@@ -268,3 +268,14 @@ doctype_js = {
     "Expedition": "public/js/expedition.js",
     "Dossier": "public/js/dossier.js",
 }
+
+
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["dt", "=", "Task"],
+            ["fieldname", "=", "custom_prestation"]
+        ]
+    }
+]
