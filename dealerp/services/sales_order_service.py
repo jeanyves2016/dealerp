@@ -18,14 +18,15 @@ def get_quotation_from_sales_order(sales_order):
     return None
 
 
-def create_or_get_dossier_from_sales_order(sales_order_name):
+def create_or_get_dossier_from_sales_order(sales_order, method=None):
     """Crée ou récupère le Dossier associé à un Sales Order soumis.
 
     La fonction est idempotente :
     un même Sales Order ne doit jamais créer plusieurs Dossiers.
     """
 
-    sales_order = frappe.get_doc("Sales Order", sales_order_name)
+    if isinstance(sales_order, str):
+        sales_order = frappe.get_doc("Sales Order", sales_order)
 
     # 1. Dossier déjà associé au Sales Order
     existing_dossier = frappe.db.get_value(
