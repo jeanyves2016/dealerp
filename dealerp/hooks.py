@@ -261,6 +261,9 @@ doc_events = {
         "on_cancel": "dealerp.sales_invoice_hooks.on_cancel",
         "on_update_after_submit": "dealerp.sales_invoice_hooks.on_update_after_submit",
         "on_trash": "dealerp.sales_invoice_hooks.on_trash",
+    },
+    "Sales Order": {
+        "on_submit": "dealerp.services.sales_order_service.create_or_get_dossier_from_sales_order",
     }
 }
 
