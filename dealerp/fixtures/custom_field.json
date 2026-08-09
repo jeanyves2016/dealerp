@@ -1,6 +1,7 @@
 [
   {
     "doctype": "Custom Field",
+    "name": "Task-custom_prestation",
     "dt": "Task",
     "fieldname": "custom_prestation",
     "fieldtype": "Link",
