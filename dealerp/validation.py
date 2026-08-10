@@ -9,7 +9,7 @@ def validate_same_company(invoice, expedition):
     expedition_company = frappe.db.get_value(
         "Expedition",
         expedition,
-        "company"
+        "custom_société"
     )
 
     if expedition_company and expedition_company != invoice.company:
