@@ -13,6 +13,8 @@ class Expedition(Document):
             customer=self.custom_client,
             company=self.custom_société,
             owner_user=self.custom_responsable,
+            quotation=None,
+            sales_order=self.custom_sales_order,
             expedition=self.name,
             description=self.goods_description,
         )
