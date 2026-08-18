@@ -6,13 +6,5 @@ class Dossier(Document):
 
 
 def get_dashboard_data(data):
-    data["transactions"] = [
-        {
-            "label": "Transit",
-            "items": [
-                "Expedition",
-            ],
-        }
-    ]
-
+    data["transactions"] = []
     return data

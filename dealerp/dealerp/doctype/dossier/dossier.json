@@ -6,31 +6,32 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "informations_g\u00e9n\u00e9rales_section",
+  "informations_générales_section",
   "dossier_number",
   "customer",
   "company",
   "type_de_dossier",
   "owner_user",
-  "onglet_d\u00e9tails_section",
+  "onglet_détails_section",
   "customer_reference",
   "internal_reference",
   "description",
   "priority",
   "commercial_section",
   "quotation",
-  "sales_order"
+  "sales_order",
+  "dashboard_html"
  ],
  "fields": [
   {
-   "fieldname": "informations_g\u00e9n\u00e9rales_section",
+   "fieldname": "informations_générales_section",
    "fieldtype": "Section Break",
-   "label": "Informations g\u00e9n\u00e9rales"
+   "label": "Informations générales"
   },
   {
    "fieldname": "dossier_number",
    "fieldtype": "Data",
-   "label": "N\u00b0 Dossier"
+   "label": "N° Dossier"
   },
   {
    "fieldname": "customer",
@@ -41,7 +42,7 @@
   {
    "fieldname": "company",
    "fieldtype": "Link",
-   "label": "Soci\u00e9t\u00e9",
+   "label": "Société",
    "options": "Company"
   },
   {
@@ -57,19 +58,19 @@
    "options": "User"
   },
   {
-   "fieldname": "onglet_d\u00e9tails_section",
+   "fieldname": "onglet_détails_section",
    "fieldtype": "Section Break",
-   "label": "Onglet d\u00e9tails"
+   "label": "Onglet détails"
   },
   {
    "fieldname": "customer_reference",
    "fieldtype": "Data",
-   "label": "R\u00e9f\u00e9rence client"
+   "label": "Référence client"
   },
   {
    "fieldname": "internal_reference",
    "fieldtype": "Data",
-   "label": "R\u00e9f\u00e9rence interne"
+   "label": "Référence interne"
   },
   {
    "fieldname": "description",
@@ -79,7 +80,7 @@
   {
    "fieldname": "priority",
    "fieldtype": "Select",
-   "label": "Priorit\u00e9",
+   "label": "Priorité",
    "options": "\nLow\nMedium\nHigh"
   },
   {
@@ -98,6 +99,11 @@
    "fieldtype": "Link",
    "label": "Commande client",
    "options": "Sales Order"
+  },
+  {
+   "fieldname": "dashboard_html",
+   "fieldtype": "HTML",
+   "label": "Tableau de bord"
   }
  ],
  "grid_page_length": 50,

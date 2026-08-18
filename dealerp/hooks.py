@@ -25,7 +25,6 @@ app_license = "agpl-3.0"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/dealerp/css/dealerp.css"
 # app_include_js = "/assets/dealerp/js/dealerp.js"
 
 # include js, css files in header of web template
@@ -39,8 +38,12 @@ app_license = "agpl-3.0"
 # webform_include_js = {"doctype": "public/js/doctype.js"}
 # webform_include_css = {"doctype": "public/css/doctype.css"}
 
+# include css files in header of desk.html
+
 # include js in page
-# page_js = {"page" : "public/js/file.js"}
+page_js = {
+    "gestion-logistique-dashboard": "public/js/gestion_logistique_dashboard.js"
+}
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
@@ -136,14 +139,6 @@ app_license = "agpl-3.0"
 # Document Events
 # ---------------
 # Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
 
 # Scheduled Tasks
 # ---------------
@@ -250,13 +245,21 @@ app_license = "agpl-3.0"
 
 
 doc_events = {
+    "Payment Entry": {
+        "on_submit": "dealerp.payment_entry_hooks.on_submit",
+        "on_cancel": "dealerp.payment_entry_hooks.on_cancel",
+        "on_update_after_submit": "dealerp.payment_entry_hooks.on_update_after_submit",
+        "on_trash": "dealerp.payment_entry_hooks.on_trash",
+    },
     "Purchase Invoice": {
+        "validate": "dealerp.purchase_invoice_hooks.on_validate",
         "on_submit": "dealerp.purchase_invoice_hooks.on_submit",
         "on_cancel": "dealerp.purchase_invoice_hooks.on_cancel",
         "on_update_after_submit": "dealerp.purchase_invoice_hooks.on_update_after_submit",
         "on_trash": "dealerp.purchase_invoice_hooks.on_trash",
     },
     "Sales Invoice": {
+        "validate": "dealerp.sales_invoice_hooks.on_validate",
         "on_submit": "dealerp.sales_invoice_hooks.on_submit",
         "on_cancel": "dealerp.sales_invoice_hooks.on_cancel",
         "on_update_after_submit": "dealerp.sales_invoice_hooks.on_update_after_submit",
@@ -270,6 +273,9 @@ doc_events = {
 doctype_js = {
     "Expedition": "public/js/expedition.js",
     "Dossier": "public/js/dossier.js",
+    "Prestation": "public/js/prestation.js",
+    "Sales Invoice": "public/js/sales_invoice.js",
+    "Purchase Invoice": "public/js/purchase_invoice.js",
 }
 
 

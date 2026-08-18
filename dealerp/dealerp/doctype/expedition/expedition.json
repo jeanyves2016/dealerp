@@ -8,16 +8,17 @@
  "field_order": [
   "dossier_section",
   "deal_dossier",
-  "column_break_vhgp",
-  "op\u00e9ration_section",
+  "opération_section",
   "transit_type",
   "operation_type",
+  "column_break_ylrx",
   "mode_transport",
   "incoterm",
   "transport_section",
   "port_origin",
   "port_destination",
   "shipping_line",
+  "column_break_njnu",
   "agency",
   "eta",
   "etd",
@@ -26,10 +27,17 @@
   "finance_section",
   "estimated_revenue",
   "invoiced_revenue",
+  "collected_revenue",
+  "outstanding_revenue",
+  "collection_percent",
+  "column_break_ngub",
   "total_cost",
   "estimated_margin",
   "actual_margin",
-  "profitability_percent"
+  "profitability_percent",
+  "sales_invoices_html",
+  "purchase_invoices_html",
+  "payments_html"
  ],
  "fields": [
   {
@@ -39,20 +47,16 @@
   },
   {
    "fieldname": "deal_dossier",
- "fieldtype": "Link",
- "read_only": 1,
- "in_list_view": 1,
- "label": "Num\u00e9ro Dossier",
- "options": "Dossier"
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Numéro Dossier",
+   "options": "Dossier",
+   "reqd": 1
   },
   {
-   "fieldname": "column_break_vhgp",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "op\u00e9ration_section",
+   "fieldname": "opération_section",
    "fieldtype": "Section Break",
-   "label": "Op\u00e9ration"
+   "label": "Opération"
   },
   {
    "fieldname": "transit_type",
@@ -64,7 +68,7 @@
   {
    "fieldname": "operation_type",
    "fieldtype": "Link",
-   "label": "Type d'op\u00e9ration",
+   "label": "Type d'opération",
    "options": "Type operation"
   },
   {
@@ -137,45 +141,90 @@
   {
    "fieldname": "estimated_revenue",
    "fieldtype": "Currency",
-   "label": "CA pr\u00e9vu",
+   "label": "CA prévu",
    "read_only": 1
   },
   {
    "fieldname": "invoiced_revenue",
    "fieldtype": "Currency",
-   "label": "CA factur\u00e9",
+   "label": "CA facturé",
    "read_only": 1
   },
   {
    "fieldname": "total_cost",
    "fieldtype": "Currency",
-   "label": "Co\u00fbt total",
+   "label": "Coût total",
    "read_only": 1
   },
   {
    "fieldname": "estimated_margin",
    "fieldtype": "Currency",
-   "label": "Marge estim\u00e9e",
+   "label": "Marge estimée",
    "read_only": 1
   },
   {
    "fieldname": "actual_margin",
    "fieldtype": "Currency",
-   "label": "Marge r\u00e9elle",
+   "label": "Marge réelle",
    "read_only": 1
   },
   {
    "fieldname": "profitability_percent",
    "fieldtype": "Percent",
-   "label": "Rentabilit\u00e9 (%)",
+   "label": "Rentabilité (%)",
    "read_only": 1
+  },
+  {
+   "fieldname": "collected_revenue",
+   "fieldtype": "Currency",
+   "label": "CA encaissé",
+   "read_only": 1
+  },
+  {
+   "fieldname": "outstanding_revenue",
+   "fieldtype": "Currency",
+   "label": "Reste à encaisser",
+   "read_only": 1
+  },
+  {
+   "fieldname": "collection_percent",
+   "fieldtype": "Percent",
+   "label": "Taux d'encaissement (%)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ylrx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_njnu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ngub",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sales_invoices_html",
+   "fieldtype": "HTML",
+   "label": "Factures clients"
+  },
+  {
+   "fieldname": "purchase_invoices_html",
+   "fieldtype": "HTML",
+   "label": "Factures fournisseurs"
+  },
+  {
+   "fieldname": "payments_html",
+   "fieldtype": "HTML",
+   "label": "Règlements"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-29 22:36:28.239180",
- "modified_by": "Administrator",
+ "modified": "2026-08-15 21:56:43.472259",
+ "modified_by": "info@dealtonsite.ci",
  "module": "Dealerp",
  "name": "Expedition",
  "naming_rule": "Expression",

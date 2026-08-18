@@ -1,50 +1,77 @@
 import frappe
 from frappe.model.document import Document
 
-from dealerp.services.dossier_service import get_or_create_dossier
-
 
 class Expedition(Document):
 
-    def after_insert(self):
-        """Crée ou récupère le dossier associé à l'expédition."""
+    def validate(self):
+        self.validate_dossier()
+        self.sync_from_dossier()
 
-        dossier = get_or_create_dossier(
-            customer=self.custom_client,
-            company=self.custom_société,
-            owner_user=self.custom_responsable,
-            quotation=None,
-            sales_order=self.custom_sales_order,
-            expedition=self.name,
-            description=self.goods_description,
-        )
+    def validate_dossier(self):
+        """
+        Une Expédition appartient obligatoirement à un Dossier.
 
-        if self.deal_dossier != dossier.name:
-            self.db_set("deal_dossier", dossier.name)
-
-    def on_update(self):
-        """Synchronise les informations de l'expédition vers son dossier."""
+        Le Dossier est le parent métier de l'activité.
+        Une Expédition ne doit jamais créer elle-même un Dossier.
+        """
 
         if not self.deal_dossier:
-            return
+            frappe.throw(
+                "Cette expédition doit obligatoirement être rattachée à un Dossier."
+            )
 
         dossier = frappe.get_doc("Dossier", self.deal_dossier)
 
-        dossier.dossier_number = dossier.name
-        dossier.customer = self.custom_client
-        dossier.company = self.custom_société
-        dossier.owner_user = self.custom_responsable
+        # Cohérence client
+        if (
+            self.custom_client
+            and dossier.customer
+            and self.custom_client != dossier.customer
+        ):
+            frappe.throw(
+                f"Le client de l'expédition ({self.custom_client}) "
+                f"ne correspond pas au client du Dossier ({dossier.customer})."
+            )
 
-        # Ne pas écraser une référence commerciale existante.
-        if not dossier.internal_reference:
-            dossier.internal_reference = self.name
+        # Cohérence société
+        if (
+            self.custom_société
+            and dossier.company
+            and self.custom_société != dossier.company
+        ):
+            frappe.throw(
+                f"La société de l'expédition ({self.custom_société}) "
+                f"ne correspond pas à la société du Dossier ({dossier.company})."
+            )
 
-        dossier.description = self.goods_description
+        # Cohérence commande client
+        if self.custom_sales_order and dossier.sales_order:
+            if self.custom_sales_order != dossier.sales_order:
+                frappe.throw(
+                    "La commande client de l'expédition "
+                    "ne correspond pas à celle du Dossier."
+                )
 
-        dossier.save(ignore_permissions=True)
+    def sync_from_dossier(self):
+        """
+        Le Dossier est la source de vérité pour les informations
+        générales de l'Expédition.
+        """
 
-    def on_cancel(self):
-        pass
+        dossier = frappe.get_doc("Dossier", self.deal_dossier)
 
-    def on_trash(self):
-        pass
+        if dossier.customer:
+            self.custom_client = dossier.customer
+
+        if dossier.company:
+            self.custom_société = dossier.company
+
+        if dossier.owner_user:
+            self.custom_responsable = dossier.owner_user
+
+        if dossier.sales_order:
+            self.custom_sales_order = dossier.sales_order
+
+        if not self.goods_description and dossier.description:
+            self.goods_description = dossier.description

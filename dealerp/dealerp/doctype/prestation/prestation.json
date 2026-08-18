@@ -36,6 +36,13 @@
    "reqd": 1
   },
   {
+   "fieldname": "prestation_type_name",
+   "fieldtype": "Data",
+   "label": "Nom de la prestation",
+   "fetch_from": "prestation_type.prestation_type_name",
+   "read_only": 1
+  },
+  {
    "fieldname": "expedition",
    "fieldtype": "Link",
    "label": "Expédition",
@@ -104,6 +111,11 @@
    "fieldtype": "Percent",
    "label": "Rentabilité",
    "read_only": 1
+  },
+  {
+   "fieldname": "financial_dashboard_html",
+   "fieldtype": "HTML",
+   "label": "Suivi financier"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -130,5 +142,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "track_changes": 1
+ "track_changes": 1,
+ "title_field": "prestation_type_name"
 }

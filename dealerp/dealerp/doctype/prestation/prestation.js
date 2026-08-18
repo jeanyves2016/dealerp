@@ -1,42 +1,66 @@
-frappe.ui.form.on("Expedition", {
+frappe.ui.form.on("Prestation", {
     refresh(frm) {
 
         if (frm.is_new()) {
             return;
         }
 
-        // ==================================================
-        // ACTIONS FINANCIÈRES
-        // ==================================================
+        frm.set_df_property("dossier", "read_only", 1);
+        frm.set_df_property("custom_client", "read_only", 1);
 
-        frm.add_custom_button(
-            __("Facture Client"),
-            () => {
-                frappe.new_doc("Sales Invoice", {
-                    custom_expedition_shipment: frm.doc.name
-                });
-            },
-            __("Finance")
-        );
+        // --------------------------------------------------
+        // FINANCE
+        // --------------------------------------------------
 
-        frm.add_custom_button(
-            __("Facture Fournisseur"),
-            () => {
-                frappe.new_doc("Purchase Invoice", {
-                    custom_expedition_shipment: frm.doc.name
-                });
-            },
-            __("Finance")
-        );
+        frm.add_custom_button(__("Facture Client"), () => {
 
-        // ==================================================
+            if (!frm.doc.dossier) {
+                frappe.msgprint(
+                    __("Cette prestation n'est rattachée à aucun Dossier.")
+                );
+                return;
+            }
+
+            frappe.new_doc("Sales Invoice", {
+                customer: frm.doc.custom_client,
+                custom_dossier: frm.doc.dossier,
+                custom_prestation: frm.doc.name
+            });
+
+        }, __("Finance"));
+
+
+        frm.add_custom_button(__("Facture Fournisseur"), () => {
+
+            if (!frm.doc.dossier) {
+                frappe.msgprint(
+                    __("Cette prestation n'est rattachée à aucun Dossier.")
+                );
+                return;
+            }
+
+            frappe.new_doc("Purchase Invoice", {
+                custom_dossier: frm.doc.dossier,
+                custom_prestation: frm.doc.name
+            });
+
+        }, __("Finance"));
+
+
+        // --------------------------------------------------
         // DONNÉES FINANCIÈRES
-        // ==================================================
+        // --------------------------------------------------
+
+        if (!frm.fields_dict.financial_dashboard_html) {
+            return;
+        }
 
         frappe.call({
-            method: "dealerp.services.expedition_service.get_financial_details",
+            method:
+                "dealerp.services.prestation_service.get_financial_details",
+
             args: {
-                expedition_name: frm.doc.name
+                prestation_name: frm.doc.name
             },
 
             callback(r) {
@@ -47,13 +71,19 @@ frappe.ui.form.on("Expedition", {
 
                 const data = r.message;
 
-                const sales_invoices = data.sales_invoices || [];
-                const purchase_invoices = data.purchase_invoices || [];
-                const payments = data.payments || [];
+                const sales_invoices =
+                    data.sales_invoices || [];
 
-                // ==================================================
+                const purchase_invoices =
+                    data.purchase_invoices || [];
+
+                const payments =
+                    data.payments || [];
+
+
+                // --------------------------------------------------
                 // KPI
-                // ==================================================
+                // --------------------------------------------------
 
                 const financial_kpis = `
                     <div class="row mb-4 deal-financial-kpis">
@@ -74,6 +104,7 @@ frappe.ui.form.on("Expedition", {
                             </div>
                         </div>
 
+
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
@@ -89,6 +120,7 @@ frappe.ui.form.on("Expedition", {
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="col-md-4">
                             <div class="card">
@@ -107,44 +139,40 @@ frappe.ui.form.on("Expedition", {
                     </div>
                 `;
 
-                if (frm.fields_dict.sales_invoices_html) {
 
-                    const dashboard_wrapper =
-                        frm.fields_dict.sales_invoices_html.$wrapper;
+                const dashboard_wrapper =
+                    frm.fields_dict.financial_dashboard_html.$wrapper;
 
-                    // Supprimer les anciens KPI avant de les recréer.
-                    dashboard_wrapper
-                        .parent()
-                        .find(".deal-financial-kpis")
-                        .remove();
+                dashboard_wrapper
+                    .find(".deal-financial-kpis")
+                    .remove();
 
-                    dashboard_wrapper.before(financial_kpis);
-                }
+                dashboard_wrapper
+                    .html(financial_kpis);
 
-                // ==================================================
+
+                // --------------------------------------------------
                 // STATUT FACTURE
-                // ==================================================
+                // --------------------------------------------------
 
                 const invoice_status = status => {
 
-                    const labels = {
-                        "Paid": __("Payée"),
-                        "Overdue": __("Impayée - échéance dépassée"),
-                        "Unpaid": __("Impayée"),
-                        "Partly Paid": __("Partiellement payée"),
-                        "Draft": __("Brouillon"),
-                        "Submitted": __("Validée"),
-                        "Cancelled": __("Annulée")
+                    const classes = {
+                        Paid: "bg-success",
+                        Overdue: "bg-danger",
+                        Unpaid: "bg-warning text-dark",
+                        Draft: "bg-secondary",
+                        Submitted: "bg-info",
+                        Cancelled: "bg-danger"
                     };
 
-                    const classes = {
-                        "Paid": "bg-success",
-                        "Overdue": "bg-danger",
-                        "Unpaid": "bg-warning text-dark",
-                        "Partly Paid": "bg-warning text-dark",
-                        "Draft": "bg-secondary",
-                        "Submitted": "bg-info",
-                        "Cancelled": "bg-secondary"
+                    const labels = {
+                        Paid: __("Payée"),
+                        Overdue: __("Impayée (échéance dépassée)"),
+                        Unpaid: __("Impayée"),
+                        Draft: __("Brouillon"),
+                        Submitted: __("Validée"),
+                        Cancelled: __("Annulée")
                     };
 
                     return `
@@ -156,36 +184,38 @@ frappe.ui.form.on("Expedition", {
                     `;
                 };
 
-                // ==================================================
+
+                // --------------------------------------------------
                 // TYPE REGLEMENT
-                // ==================================================
+                // --------------------------------------------------
 
                 const payment_type = type => {
 
                     const labels = {
-                        "Receive": __("Encaissement"),
-                        "Pay": __("Règlement fournisseur")
+                        Receive: __("Encaissement"),
+                        Pay: __("Règlement fournisseur")
                     };
 
                     return labels[type] || __(type || "");
                 };
 
-                // ==================================================
+
+                // --------------------------------------------------
                 // STATUT REGLEMENT
-                // ==================================================
+                // --------------------------------------------------
 
                 const payment_status = status => {
 
                     const labels = {
-                        "Submitted": __("Validé"),
-                        "Cancelled": __("Annulé"),
-                        "Draft": __("Brouillon")
+                        Submitted: __("Validé"),
+                        Draft: __("Brouillon"),
+                        Cancelled: __("Annulé")
                     };
 
                     const classes = {
-                        "Submitted": "bg-success",
-                        "Cancelled": "bg-danger",
-                        "Draft": "bg-secondary"
+                        Submitted: "bg-success",
+                        Draft: "bg-secondary",
+                        Cancelled: "bg-danger"
                     };
 
                     return `
@@ -197,9 +227,10 @@ frappe.ui.form.on("Expedition", {
                     `;
                 };
 
-                // ==================================================
+
+                // --------------------------------------------------
                 // FACTURES CLIENTS
-                // ==================================================
+                // --------------------------------------------------
 
                 let sales = `
                     <h4 class="mt-4">
@@ -224,11 +255,13 @@ frappe.ui.form.on("Expedition", {
                         <tbody>
                 `;
 
+
                 if (!sales_invoices.length) {
 
                     sales += `
                         <tr>
-                            <td colspan="7" class="text-muted text-center">
+                            <td colspan="8"
+                                class="text-muted text-center">
                                 ${__("Aucune facture client")}
                             </td>
                         </tr>
@@ -258,11 +291,12 @@ frappe.ui.form.on("Expedition", {
                                 </td>
 
                                 <td>
-                                    ${row.due_date
-                                        ? frappe.datetime.str_to_user(
-                                            row.due_date
-                                        )
-                                        : "-"
+                                    ${
+                                        row.due_date
+                                            ? frappe.datetime.str_to_user(
+                                                row.due_date
+                                            )
+                                            : "-"
                                     }
                                 </td>
 
@@ -303,6 +337,7 @@ frappe.ui.form.on("Expedition", {
                     });
                 }
 
+
                 sales += `
                         </tbody>
 
@@ -318,7 +353,9 @@ frappe.ui.form.on("Expedition", {
                                         sales_invoices.reduce(
                                             (total, row) =>
                                                 total +
-                                                Number(row.grand_total || 0),
+                                                Number(
+                                                    row.grand_total || 0
+                                                ),
                                             0
                                         )
                                     )}
@@ -345,14 +382,10 @@ frappe.ui.form.on("Expedition", {
                     </table>
                 `;
 
-                if (frm.fields_dict.sales_invoices_html) {
-                    frm.fields_dict.sales_invoices_html.$wrapper
-                        .html(sales);
-                }
 
-                // ==================================================
+                // --------------------------------------------------
                 // FACTURES FOURNISSEURS
-                // ==================================================
+                // --------------------------------------------------
 
                 let purchase = `
                     <h4 class="mt-4">
@@ -377,11 +410,13 @@ frappe.ui.form.on("Expedition", {
                         <tbody>
                 `;
 
+
                 if (!purchase_invoices.length) {
 
                     purchase += `
                         <tr>
-                            <td colspan="7" class="text-muted text-center">
+                            <td colspan="8"
+                                class="text-muted text-center">
                                 ${__("Aucune facture fournisseur")}
                             </td>
                         </tr>
@@ -411,11 +446,12 @@ frappe.ui.form.on("Expedition", {
                                 </td>
 
                                 <td>
-                                    ${row.due_date
-                                        ? frappe.datetime.str_to_user(
-                                            row.due_date
-                                        )
-                                        : "-"
+                                    ${
+                                        row.due_date
+                                            ? frappe.datetime.str_to_user(
+                                                row.due_date
+                                            )
+                                            : "-"
                                     }
                                 </td>
 
@@ -456,6 +492,7 @@ frappe.ui.form.on("Expedition", {
                     });
                 }
 
+
                 purchase += `
                         </tbody>
 
@@ -471,7 +508,9 @@ frappe.ui.form.on("Expedition", {
                                         purchase_invoices.reduce(
                                             (total, row) =>
                                                 total +
-                                                Number(row.grand_total || 0),
+                                                Number(
+                                                    row.grand_total || 0
+                                                ),
                                             0
                                         )
                                     )}
@@ -498,14 +537,10 @@ frappe.ui.form.on("Expedition", {
                     </table>
                 `;
 
-                if (frm.fields_dict.purchase_invoices_html) {
-                    frm.fields_dict.purchase_invoices_html.$wrapper
-                        .html(purchase);
-                }
 
-                // ==================================================
+                // --------------------------------------------------
                 // REGLEMENTS
-                // ==================================================
+                // --------------------------------------------------
 
                 let payments_html = `
                     <h4 class="mt-4">
@@ -529,11 +564,13 @@ frappe.ui.form.on("Expedition", {
                         <tbody>
                 `;
 
+
                 if (!payments.length) {
 
                     payments_html += `
                         <tr>
-                            <td colspan="7" class="text-muted text-center">
+                            <td colspan="8"
+                                class="text-muted text-center">
                                 ${__("Aucun règlement")}
                             </td>
                         </tr>
@@ -547,6 +584,7 @@ frappe.ui.form.on("Expedition", {
                             row.reference_doctype === "Sales Invoice"
                                 ? `/app/sales-invoice/${row.reference_name}`
                                 : `/app/purchase-invoice/${row.reference_name}`;
+
 
                         payments_html += `
                             <tr>
@@ -594,6 +632,7 @@ frappe.ui.form.on("Expedition", {
                     });
                 }
 
+
                 payments_html += `
                         </tbody>
 
@@ -627,102 +666,149 @@ frappe.ui.form.on("Expedition", {
                     </table>
                 `;
 
-                if (frm.fields_dict.payments_html) {
-                    frm.fields_dict.payments_html.$wrapper
-                        .html(payments_html);
-                }
+
+                // --------------------------------------------------
+                // AFFICHAGE
+                // --------------------------------------------------
+
+                dashboard_wrapper.html(
+                    financial_kpis +
+                    sales +
+                    purchase +
+                    payments_html
+                );
 
                 // ==================================================
                 // REGLEMENT DIRECT D'UNE FACTURE
                 // ==================================================
 
-                const invoice_wrappers = [
-                    frm.fields_dict.sales_invoices_html,
-                    frm.fields_dict.purchase_invoices_html
-                ].filter(Boolean);
+                dashboard_wrapper
+                    .find(".btn-pay-invoice")
+                    .off("click")
+                    .on("click", function () {
 
-                invoice_wrappers.forEach(field => {
+                        const button = $(this);
 
-                    field.$wrapper
-                        .find(".btn-pay-invoice")
-                        .off("click")
-                        .on("click", function () {
+                        const invoice_name =
+                            button.attr("data-name");
 
-                            const button = $(this);
+                        const invoice_type =
+                            button.attr("data-type");
 
-                            const invoice_name =
-                                button.attr("data-name");
+                        if (!invoice_name || !invoice_type) {
+                            frappe.msgprint(
+                                __("Impossible d'identifier la facture.")
+                            );
+                            return;
+                        }
 
-                            const invoice_type =
-                                button.attr("data-type");
+                        const doctype =
+                            invoice_type === "sales"
+                                ? "Sales Invoice"
+                                : "Purchase Invoice";
 
-                            if (!invoice_name || !invoice_type) {
+                        // --------------------------------------------------
+                        // UTILISER LE MECANISME NATIF ERPNext
+                        // --------------------------------------------------
+
+                        frappe.call({
+                            method:
+                                "erpnext.accounts.doctype.payment_entry.payment_entry.get_payment_entry",
+
+                            args: {
+                                dt: doctype,
+                                dn: invoice_name
+                            },
+
+                            freeze: true,
+
+                            freeze_message:
+                                __("Préparation du règlement...")
+                        }).then(r => {
+
+                            if (!r.message) {
                                 frappe.msgprint(
-                                    __("Impossible d'identifier la facture.")
+                                    __("Impossible de préparer le règlement.")
                                 );
                                 return;
                             }
 
-                            const doctype =
-                                invoice_type === "sales"
-                                    ? "Sales Invoice"
-                                    : "Purchase Invoice";
+                            const payment_entry = r.message;
 
                             // --------------------------------------------------
-                            // MECANISME NATIF ERPNext
+                            // RATTACHEMENT A LA PRESTATION
                             // --------------------------------------------------
 
-                            frappe.call({
-                                method:
-                                    "erpnext.accounts.doctype.payment_entry.payment_entry.get_payment_entry",
+                            payment_entry.custom_prestation =
+                                frm.doc.name;
 
-                                args: {
-                                    dt: doctype,
-                                    dn: invoice_name
-                                },
+                            // --------------------------------------------------
+                            // SYNCHRONISATION ET OUVERTURE
+                            // --------------------------------------------------
 
-                                freeze: true,
+                            frappe.model.sync(payment_entry);
 
-                                freeze_message:
-                                    __("Préparation du règlement...")
-
-                            }).then(r => {
-
-                                if (!r.message) {
-                                    frappe.msgprint(
-                                        __("Impossible de préparer le règlement.")
-                                    );
-                                    return;
-                                }
-
-                                const payment_entry = r.message;
-
-                                // --------------------------------------------------
-                                // RATTACHEMENT A L'EXPEDITION
-                                // --------------------------------------------------
-
-                                payment_entry.custom_expedition_shipment =
-                                    frm.doc.name;
-
-                                // --------------------------------------------------
-                                // SYNCHRONISATION ET OUVERTURE
-                                // --------------------------------------------------
-
-                                frappe.model.sync(payment_entry);
-
-                                frappe.set_route(
-                                    "Form",
-                                    "Payment Entry",
-                                    payment_entry.name
-                                );
-
-                            });
+                            frappe.set_route(
+                                "Form",
+                                "Payment Entry",
+                                payment_entry.name
+                            );
 
                         });
 
-                });
+                    });
 
+                }
+            });
+
+        },
+
+
+    dossier(frm) {
+
+        frm.set_value("expedition", null);
+        frm.set_value("custom_client", null);
+
+        if (!frm.doc.dossier) {
+            return;
+        }
+
+        frappe.db.get_value(
+            "Dossier",
+            frm.doc.dossier,
+            [
+                "customer",
+                "owner_user"
+            ]
+        ).then(r => {
+
+            if (!r.message) {
+                return;
             }
+
+            if (r.message.customer) {
+                frm.set_value(
+                    "custom_client",
+                    r.message.customer
+                );
+            }
+
+            if (r.message.owner_user) {
+                frm.set_value(
+                    "responsable",
+                    r.message.owner_user
+                );
+            }
+        });
+
+        frm.set_query("expedition", function() {
+
+            return {
+                filters: {
+                    deal_dossier: frm.doc.dossier
+                }
+            };
+
         });
     }
 });
