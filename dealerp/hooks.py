@@ -288,3 +288,6 @@ fixtures = [
         ]
     }
 ]
+
+# Custom Gestion Logistique Workspace
+app_include_js = ["dealerp/public/js/gestion_logistique_workspace.bundle.js"]
