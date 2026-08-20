@@ -159,7 +159,7 @@
         return card;
     }
 
-    function render() {
+    function render(habilitations) {
         const workspace = document.querySelector(".layout-main-section");
 
         if (!workspace) return;
@@ -181,6 +181,14 @@
 
         const grid = document.createElement("div");
         grid.className = "dealerp-gl-grid";
+
+        if (habilitations.dashboard_logistique) {
+            grid.appendChild(create_card("Vue d'ensemble", "chart-line", [{
+                label: "Dashboard",
+                route: "gestion-logistique-dashboard",
+                icon: "bar-chart"
+            }]));
+        }
 
         grid.appendChild(
             create_card("Opérations", "truck", [
@@ -278,8 +286,13 @@
     function init() {
         inject_css();
 
-        setTimeout(render, 300);
-        setTimeout(render, 1000);
+        frappe.call({
+            method: "dealerp.api.dealerp_v1_habilitations.get_my_habilitations"
+        }).then(r => {
+            render(r.message || {dashboard_logistique: false, reporting_operationnel: false, reporting_financier: false});
+        }).catch(() => {
+            render({dashboard_logistique: false, reporting_operationnel: false, reporting_financier: false});
+        });
     }
 
     frappe.after_ajax(() => {
